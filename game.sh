@@ -51,6 +51,11 @@ while true; do
             ((coordx--))
             echo "$coordx,$coordy"
         ;;
+        s)
+            printf "gots to start!!!"
+            sleep 1
+            break
+        ;;
         q)
             printf "\nQuitting...\n"
             sleep .3
