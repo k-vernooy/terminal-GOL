@@ -1,29 +1,29 @@
 #!/bin/bash
 
-    # clear
-    # sleep .2
+# clear
+# sleep .2
 
-    # echo "Welcome to the terminal recreation of Conway's
-    #   ____    _    __  __ _____    ___  _____   _     ___ _____ _____ 
-    #  / ___|  / \  |  \/  | ____|  / _ \|  ___| | |   |_ _|  ___| ____|
-    # | |  _  / _ \ | |\/| |  _|   | | | | |_    | |    | || |_  |  _|  
-    # | |_| |/ ___ \| |  | | |___  | |_| |  _|   | |___ | ||  _| | |___ 
-    #  \____/_/   \_\_|  |_|_____|  \___/|_|     |_____|___|_|   |_____|"
+# echo "Welcome to the terminal recreation of Conway's
+#   ____    _    __  __ _____    ___  _____   _     ___ _____ _____ 
+#  / ___|  / \  |  \/  | ____|  / _ \|  ___| | |   |_ _|  ___| ____|
+# | |  _  / _ \ | |\/| |  _|   | | | | |_    | |    | || |_  |  _|  
+# | |_| |/ ___ \| |  | | |___  | |_| |  _|   | |___ | ||  _| | |___ 
+#  \____/_/   \_\_|  |_|_____|  \___/|_|     |_____|___|_|   |_____|"
 
-    # sleep 2
-    # printf "\nPress any key to continue."
-    # read -r -sn1 t
-    # clear
+# sleep 2
+# printf "\nPress any key to continue."
+# read -r -sn1 t
+# clear
 
-    # echo -e "Move cursor with the arrow keys.\n
-    # 'i' = place block.
-    # 'x' = remove block 
-    # 's' = begin simulation"
+# echo -e "Move cursor with the arrow keys.\n
+# 'i' = place block.
+# 'x' = remove block 
+# 's' = begin simulation"
 
-    # sleep 2
-    # printf "\nPress any key to begin."
-    # read -r -sn1 t
-    # clear
+# sleep 2
+# printf "\nPress any key to begin."
+# read -r -sn1 t
+clear
 
 coordx=0
 coordy=0
@@ -32,29 +32,44 @@ while true; do
     read -r -sn1 t
     case $t in
         A) 
-            clear
-            ((coordy++)) 
-            echo "$coordx,$coordy"            
+            
+            if [ $coordy -ne 0 ]; then
+                ((coordy--))
+            fi
+            tput cup $coordy $coordx
+            
         ;;
         B) 
-            clear
-            ((coordy--))
-            echo "$coordx,$coordy"
+            lines=$(tput lines | tr -d ' ') 
+            if [ $coordy -ne $lines ]; then
+                ((coordy++)) 
+            fi
+            tput cup $coordy $coordx
         ;;
-        C) 
-            clear
-            ((coordx++))
-            echo "$coordx,$coordy"
+        C)
+            cols=$(tput cols | tr -d ' ') 
+            if [ $coordx -ne $cols ]; then
+                ((coordx++))
+            fi
+            tput cup $coordy $coordx
+             
         ;;
         D) 
-            clear
-            ((coordx--))
-            echo "$coordx,$coordy"
+            
+            if [ $coordx -ne 0 ]; then
+                ((coordx--))
+            fi
+            tput cup $coordy $coordx
+            
         ;;
         s)
             printf "gots to start!!!"
             sleep 1
             break
+        ;;
+        i)
+            printf "█"
+            tput cup $coordy $coordx
         ;;
         q)
             printf "\nQuitting...\n"
