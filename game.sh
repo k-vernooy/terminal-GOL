@@ -71,6 +71,10 @@ while true; do
             printf "█"
             tput cup $coordy $coordx
         ;;
+        x)
+            printf " "
+            tput cup $coordy $coordx
+        ;;
         q)
             printf "\nQuitting...\n"
             sleep .3
