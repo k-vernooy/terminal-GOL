@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#=====================================
+# Add function for quit - restore stty
+#=====================================
 trap ctrl_c INT
 
 function ctrl_c() {
@@ -10,12 +13,15 @@ function ctrl_c() {
     exit 0
 }
 
-
 coords() {
     tput cup 3 0;
     display=$(echo "$1 - 5" | bc)
-    printf "Cusor coordinates: $display $2     "
+    printf "Cusor coordinates: $display,$2     "
 }
+
+#=====================================
+# Start screen for basic ui
+#=====================================
 
 clear
 sleep .2
@@ -31,24 +37,37 @@ printf "\nPress any key to continue."
 read -r -sn1 t
 clear
 
-clear
-stty -echo
-declare -a selected
+#===================================================
+#  Function for drawing lines across entire screen
+#+==================================================
+function lines() {
+    for i in $(seq $(tput cols)); do printf "="; done; printf "\n"
+}
 
-selected+=($(tput cols) $(tput lines))
-
-for i in $(seq $(tput cols)); do printf "="; done
-
-echo -e "Grid Size: ${selected[1]} x ${selected[0]}\t\t\t'i' = place block."
+#========================
+#  Create top screen ui
+#+=======================
+lines
+echo -e "Grid Size: $(tput lines) x $(tput cols)\t\t\t'i' = place block."
 echo -e "Move cursor with the arrow keys.\t'x' = remove block"
-
 echo -e "\t\t\t\t\t's' = begin simulation"
-for i in $(seq $(tput cols)); do printf "="; done; printf "\n"
+lines
 
 coordx=0
 coordy=5
+
 coords 5 0
 tput cup 5 0
+
+#===================================
+#  Create array to be passed to c++
+#+==================================
+
+declare -a selected
+selected+=( $(tput cols) $(tput lines) )
+
+stty -echo
+
 while true; do
     read -r -sn1 t
     case "$t" in
