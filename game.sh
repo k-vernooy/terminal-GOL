@@ -1,8 +1,20 @@
 #!/bin/bash
 
+trap ctrl_c INT
+
+function ctrl_c() {
+    stty echo
+    printf "\nQuitting...\n"
+    sleep .3
+    clear
+    exit 0
+}
+
+
 coords() {
     tput cup 3 0;
-    printf "Cusor coordinates: $1 $2     "
+    display=$(echo "$1 - 5" | bc)
+    printf "Cusor coordinates: $display $2     "
 }
 
 clear
@@ -15,7 +27,6 @@ echo "Welcome to the terminal recreation of Conway's
 | |_| |/ ___ \| |  | | |___  | |_| |  _|   | |___ | ||  _| | |___ 
  \____/_/   \_\_|  |_|_____|  \___/|_|     |_____|___|_|   |_____|"
 
-sleep 2
 printf "\nPress any key to continue."
 read -r -sn1 t
 clear
@@ -36,7 +47,7 @@ for i in $(seq $(tput cols)); do printf "="; done; printf "\n"
 
 coordx=0
 coordy=5
-coords 0 0
+coords 5 0
 tput cup 5 0
 while true; do
     read -r -sn1 t
@@ -103,6 +114,7 @@ while true; do
         q)
             printf "\nQuitting...\n"
             sleep .3
+            stty echo
             clear
             exit 0
     esac
