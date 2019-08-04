@@ -15,29 +15,48 @@
 # read -r -sn1 t
 # clear
 
-# echo -e "Move cursor with the arrow keys.\n
-# 'i' = place block.
-# 'x' = remove block 
-# 's' = begin simulation"
+
 
 # sleep 2
 # printf "\nPress any key to begin."
 # read -r -sn1 t
+
+coords() {
+    tput cup 3 0;
+    printf "Cusor coordinates: $1 $2     "
+}
+
 clear
+stty -echo
+declare -a selected
+
+selected+=($(tput cols) $(tput lines))
+
+for i in $(seq $(tput cols)); do printf "="; done
+
+echo -e "Grid Size: ${selected[1]} x ${selected[0]}\t\t\t'i' = place block."
+echo -e "Move cursor with the arrow keys.\t'x' = remove block"
+
+echo -e "\t\t\t\t\t's' = begin simulation"
+for i in $(seq $(tput cols)); do printf "="; done; printf "\n"
 
 coordx=0
-coordy=0
+coordy=5
+coords 0 0
 
 while true; do
-    read -r -sn3 t
-    case "${t:2:1}" in
+    read -r -sn1 t
+    case "$t" in
         A) 
             
-            if [ $coordy -ne 0 ]; then
+            if [ $coordy -ne 5 ]; then
                 ((coordy--))
             else
                 tput bel
             fi
+
+            coords $coordy $coordx
+
             tput cup $coordy $coordx
 
         ;;
@@ -48,6 +67,7 @@ while true; do
             else
                 tput bel
             fi
+            coords $coordy $coordx
             tput cup $coordy $coordx
 
         ;;
@@ -58,6 +78,7 @@ while true; do
             else
                 tput bel
             fi
+            coords $coordy $coordx
             tput cup $coordy $coordx
 
         ;;
@@ -68,6 +89,7 @@ while true; do
             else 
                 tput bel
             fi
+            coords $coordy $coordx
             tput cup $coordy $coordx
 
         ;;
@@ -92,3 +114,5 @@ while true; do
     esac
 done
 clear
+
+stty echo
