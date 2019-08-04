@@ -7,7 +7,8 @@ trap ctrl_c INT
 
 function ctrl_c() {
     stty echo
-    printf "\nQuitting...\n"
+    clear
+    printf "Quitting...\n"
     sleep .3
     clear
     exit 0
@@ -48,7 +49,7 @@ function lines() {
 #  Create top screen ui
 #+=======================
 lines
-echo -e "Grid Size: $(tput lines) x $(tput cols)\t\t\t'i' = place block."
+echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)\t\t\t'i' = place block."
 echo -e "Move cursor with the arrow keys.\t'x' = remove block"
 echo -e "\t\t\t\t\t's' = begin simulation"
 lines
@@ -118,24 +119,24 @@ while true; do
 
         ;;
         s)
-            printf "gots to start!!!"
-
-            break
+            clear
+            echo ${selected[@]}
         ;;
         i)
             printf "█"
             tput cup $coordy $coordx
+            coordry=$(echo "$coordy - 5" | bc)
+            selected+=("${coordry}_${coordx}")
         ;;
         x)
             printf " "
             tput cup $coordy $coordx
+            coordry=$(echo "$coordy - 5" | bc)
+            delete=("${coordry}_${coordx}")
+            selected=( "${selected[@]/$delete}" )
         ;;
         q)
-            printf "\nQuitting...\n"
-            sleep .3
-            stty echo
-            clear
-            exit 0
+            ctrl_c
     esac
 done
 clear
