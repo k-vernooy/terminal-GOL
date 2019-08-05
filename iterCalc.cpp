@@ -2,6 +2,7 @@
 #include <vector> 
 #include <sstream> 
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -41,10 +42,22 @@ vector<string> neighbors(std::string data) {
 
 void relevantTiles(vector<string> input) {
     for ( int i = 0; i < input.size(); i++) {
-        // cout << input[i] << endl;
+
+        vector<string> relevantTiles;
+        string curTile;
+
         cout << "current coords being calculated for neighboors: " << input[i] << endl;
+
         for ( int x = 0; x < 8; x++) {
-            std::cout << neighbors(input[i])[x] << endl;
+            curTile = neighbors(input[i])[x];
+
+            //Checking if v contains the element x:
+
+            if (std::find(relevantTiles.begin(), relevantTiles.end(), curTile) != relevantTiles.end()) {
+                cout << "already there!" << endl;
+            } else {
+                relevantTiles.push_back(curTile);
+            }
         }
     }
 }
