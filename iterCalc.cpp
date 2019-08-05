@@ -3,6 +3,12 @@
 
 using namespace std;
 
+void relevantTiles(vector<string> input) {
+    for ( int i = 0; i < input.size(); i++) {
+        cout << input[i] << endl;
+    }
+}
+
 int main(int argc, char *argv[]) {
     std::cout << "height: " << argv[1] << endl;
     std::cout << "width: " << argv[2] << endl;
@@ -13,6 +19,6 @@ int main(int argc, char *argv[]) {
         // std::cout << "active: " << argv[i] << endl;
         data.push_back(argv[i]);
     }
-    for(int i=0; i < data.size(); ++i)
-    std::cout << data[i] << ' ';
+
+    relevantTiles(data);
 }
