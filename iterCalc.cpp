@@ -40,31 +40,41 @@ vector<string> neighbors(std::string data) {
     // cout << c1 << ", " << c2 << endl;
 }
 
-void relevantTiles(vector<string> input) {
+vector<string> relevantTiles(vector<string> input) {
+    vector<string> relevantiles;
+    string curTile;
+
     for ( int i = 0; i < input.size(); i++) {
+        if ( std::find(relevantiles.begin(), relevantiles.end(), curTile) != relevantiles.end() )
+            cout << "already there!" << endl;
+        else
+            relevantiles.push_back(input[i]);
 
-        vector<string> relevantTiles;
-        string curTile;
-
-        cout << "current coords being calculated for neighboors: " << input[i] << endl;
+        cout << "adding coords to vector, calculating for neighboors: " << input[i] << endl;
 
         for ( int x = 0; x < 8; x++) {
             curTile = neighbors(input[i])[x];
 
             //Checking if v contains the element x:
 
-            if (std::find(relevantTiles.begin(), relevantTiles.end(), curTile) != relevantTiles.end()) {
+            if ( std::find(relevantiles.begin(), relevantiles.end(), curTile) != relevantiles.end() )
                 cout << "already there!" << endl;
-            } else {
-                relevantTiles.push_back(curTile);
-            }
+            else
+                // cout << "pushing " << curTile << " to the end" << endl;
+                relevantiles.push_back(curTile);
         }
     }
+    return relevantiles;
 }
 
 int main(int argc, char *argv[]) {
-    std::cout << "height: " << argv[1] << endl;
-    std::cout << "width: " << argv[2] << endl;
+    int height, width;
+
+    // height = argv[1];
+    // width = argv[2];
+    
+    cout << "height: " << argv[1] << endl;
+    cout << "width: " << argv[2] << endl;
 
     vector<string> data;
 
@@ -73,5 +83,10 @@ int main(int argc, char *argv[]) {
         data.push_back(argv[i]);
     }
 
-    relevantTiles(data);
+    vector<string> tiles = relevantTiles(data);
+
+    for ( int i = 0; i < tiles.size(); i++) {
+        cout << tiles[i] << " ";
+    }
+
 }
