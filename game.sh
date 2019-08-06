@@ -9,10 +9,38 @@ function ctrl_c() {
     clear
     exit 0
 }
+function lines() {
+    for i in $(seq $(tput cols)); do printf "="; done; printf "\n"
+}
 coords() {
     tput cup 3 0;
     display=$(echo "$1 - 5" | bc)
     printf "Cusor coordinates: $display,$2     "
+}
+draw() {
+    for i; do
+        y=${i%_*}
+        x=${i#*_}
+        printf '\e[%d;%dH█' "$(( y + 6 ))" "$(( x + 1 ))"
+    done
+}
+loop(){
+    clear
+    lines
+    frameNum=1
+    echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)"
+    echo -e "Frame $frameNum"
+    echo -e ""
+    lines
+    # tput cup 0 0
+    # echo "HAIOHDIOG"
+    # draw ${selected[@]};
+    ./iterCalc ${selected[@]}
+    # while true; do
+    #     # draw the next iteration
+    #     ./iterCalc ${selected[@]}
+    # done
+    sleep 10000
 }
 clear
 sleep .2
@@ -22,14 +50,9 @@ echo "Welcome to the terminal recreation of Conway's
 | |  _  / _ \ | |\/| |  _|   | | | | |_    | |    | || |_  |  _|  
 | |_| |/ ___ \| |  | | |___  | |_| |  _|   | |___ | ||  _| | |___ 
  \____/_/   \_\_|  |_|_____|  \___/|_|     |_____|___|_|   |_____|"
-
 printf "\nPress any key to continue."
 read -r -sn1 t
 clear
-
-function lines() {
-    for i in $(seq $(tput cols)); do printf "="; done; printf "\n"
-}
 lines
 echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)\t\t\t'i' = place block."
 echo -e "Move cursor with the arrow keys.\t'x' = remove block"
@@ -38,7 +61,6 @@ lines
 
 coordx=0
 coordy=5
-
 coords 5 0
 tput cup 5 0
 
@@ -46,7 +68,6 @@ tput cup 5 0
 #  Create array to be passed to c++
 #+==================================
 declare -a selected
-selected+=( $(tput cols) $(tput lines) )
 stty -echo
 while true; do
     read -r -sn1 t
@@ -91,8 +112,8 @@ while true; do
             tput cup $coordy $coordx
         ;;
         s)
-            clear
-            echo ${selected[@]}
+            loop && break
+            
         ;;
         i)
             printf "█"
