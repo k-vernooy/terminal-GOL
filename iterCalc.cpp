@@ -46,7 +46,7 @@ vector<string> relevantTiles(vector<string> input) {
 
     for ( int i = 0; i < input.size(); i++) {
         if ( std::find(relevantiles.begin(), relevantiles.end(), curTile) != relevantiles.end() )
-            cout << "already there!" << endl;
+                cout << "";
         else
             relevantiles.push_back(input[i]);
 
@@ -58,7 +58,7 @@ vector<string> relevantTiles(vector<string> input) {
             //Checking if v contains the element x:
 
             if ( std::find(relevantiles.begin(), relevantiles.end(), curTile) != relevantiles.end() )
-                cout << "already there!" << endl;
+                cout << "";
             else
                 // cout << "pushing " << curTile << " to the end" << endl;
                 relevantiles.push_back(curTile);
@@ -86,7 +86,13 @@ int main(int argc, char *argv[]) {
     vector<string> tiles = relevantTiles(data);
 
     for ( int i = 0; i < tiles.size(); i++) {
-        cout << tiles[i] << " ";
+        
+
+        if ( std::find(data.begin(), data.end(), tiles[i]) != data.end() )
+            cout << tiles[i] << " is alive";
+        else
+            cout << tiles[i] << " is dead";
+
     }
 
 }
