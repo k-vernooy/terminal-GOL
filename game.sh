@@ -1,10 +1,6 @@
 #!/bin/bash
 
-#=====================================
-# Add function for quit - restore stty
-#=====================================
 trap ctrl_c INT
-
 function ctrl_c() {
     stty echo
     clear
@@ -13,20 +9,13 @@ function ctrl_c() {
     clear
     exit 0
 }
-
 coords() {
     tput cup 3 0;
     display=$(echo "$1 - 5" | bc)
     printf "Cusor coordinates: $display,$2     "
 }
-
-#=====================================
-# Start screen for basic ui
-#=====================================
-
 clear
 sleep .2
-
 echo "Welcome to the terminal recreation of Conway's
   ____    _    __  __ _____    ___  _____   _     ___ _____ _____ 
  / ___|  / \  |  \/  | ____|  / _ \|  ___| | |   |_ _|  ___| ____|
@@ -38,16 +27,9 @@ printf "\nPress any key to continue."
 read -r -sn1 t
 clear
 
-#===================================================
-#  Function for drawing lines across entire screen
-#+==================================================
 function lines() {
     for i in $(seq $(tput cols)); do printf "="; done; printf "\n"
 }
-
-#========================
-#  Create top screen ui
-#+=======================
 lines
 echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)\t\t\t'i' = place block."
 echo -e "Move cursor with the arrow keys.\t'x' = remove block"
@@ -63,27 +45,20 @@ tput cup 5 0
 #===================================
 #  Create array to be passed to c++
 #+==================================
-
 declare -a selected
 selected+=( $(tput cols) $(tput lines) )
-
 stty -echo
-
 while true; do
     read -r -sn1 t
     case "$t" in
         A) 
-            
             if [ $coordy -ne 5 ]; then
                 ((coordy--))
             else
                 tput bel
             fi
-
             coords $coordy $coordx
-
             tput cup $coordy $coordx
-
         ;;
         B) 
             lines=$(tput lines | tr -d ' ') 
@@ -94,7 +69,6 @@ while true; do
             fi
             coords $coordy $coordx
             tput cup $coordy $coordx
-
         ;;
         C)
             cols=$(tput cols | tr -d ' ') 
@@ -105,7 +79,6 @@ while true; do
             fi
             coords $coordy $coordx
             tput cup $coordy $coordx
-
         ;;
         D) 
             
@@ -116,7 +89,6 @@ while true; do
             fi
             coords $coordy $coordx
             tput cup $coordy $coordx
-
         ;;
         s)
             clear
@@ -140,5 +112,4 @@ while true; do
     esac
 done
 clear
-
 stty echo
