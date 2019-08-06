@@ -153,9 +153,9 @@ int main(int argc, char *argv[]) {
 
 }
 
-//==============================================
+//=========================
 // Game of life logic:
-//==============================================
+//=========================
 //A live cell dies if it has fewer than two live neighbors.
 // A live cell with two or three live neighbors lives on to the next generation.
 // A live cell with more than three live neighbors dies.
