@@ -6,25 +6,6 @@
 
 using namespace std;
 
-vector<int> liveNeighbors(vector<string> live, vector<string> tiles) {
-    vector<int> liveNeighbors;
-
-    // For each tile:
-    for ( int i = 0; i < tiles.size(); i++) {
-        vector<string> neighborsList = neighbors(tiles[i]);
-        // for each neighbor of every tile:
-        int liveNeCount;
-        for ( int j = 0; j < 8; j++) {
-            // if the a given neighbor of a given tile is in live, add 1 to the liveNeCount of the given tile
-            if ( find(live.begin(), live.end(), neighborsList[j]) != live.end() ) {
-                liveNeCount = liveNeCount + 1;
-            }
-        }
-        liveNeighbors.push_back(liveNeCount);
-    }
-    return liveNeighbors;
-}
-
 vector<string> neighbors(string data) {
     string n1, n2, n3, n4, n5, n6, n7, n8;
     string d1 = data.substr(0, 1); 
@@ -55,9 +36,30 @@ vector<string> neighbors(string data) {
 
     vector<string> returnArray = { n1, n2, n3, n4, n5, n6, n7, n8 };
     return returnArray;
-
-    // cout << c1 << ", " << c2 << endl;
 }
+
+void liveNeighbors(vector<string> live, vector<string> tiles) {
+    vector<int> liveNeighbors;
+
+    // For each tile:
+    for ( int i = 0; i < tiles.size(); i++) {
+        vector<string> neighborsList = neighbors(tiles[i]);
+        // for each neighbor of every tile:
+        int liveNeCount;
+        for ( int j = 0; j < 8; j++) {
+            // if the a given neighbor of a given tile is in live, add 1 to the liveNeCount of the given tile
+            if ( find(live.begin(), live.end(), neighborsList[j]) != live.end() ) {
+                cout << "found" << endl;
+                cout << neighborsList[j];
+                liveNeCount = liveNeCount + 1;
+            }
+        }
+        liveNeighbors.push_back(liveNeCount);
+    }
+    // return liveNeighbors;
+}
+
+
 
 vector<string> relevantTiles(vector<string> input) {
     vector<string> relevantiles;
@@ -77,7 +79,6 @@ vector<string> relevantTiles(vector<string> input) {
             if ( find(relevantiles.begin(), relevantiles.end(), curTile) != relevantiles.end() )
                 cout << "";
             else
-                // cout << "pushing " << curTile << " to the end" << endl;
                 relevantiles.push_back(curTile);
         }
     }
@@ -96,7 +97,6 @@ int main(int argc, char *argv[]) {
     vector<string> data;
 
     for ( int i = argc - 1; i > 2; i--) {
-        // cout << "active: " << argv[i] << endl;
         data.push_back(argv[i]);
     }
 
@@ -114,10 +114,11 @@ int main(int argc, char *argv[]) {
 
     }
 
-    for ( int i = 0; i < tiles.size(); i++) {
-        cout << tiles[i] << " " << live[i] << endl;
-    }
+    // vector<int> neighbors = liveNeighbors(tiles, data);
+    // for ( int i = 0; i < tiles.size(); i++) {
+    //     cout << tiles[i] << " " << live[i] << endl;
+    // }
 
-    vector<int> neighbors = liveNeighbors(tiles, data);
+    liveNeighbors(tiles, data);
 
 }
