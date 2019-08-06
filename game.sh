@@ -3,10 +3,10 @@
 trap ctrl_c INT
 function ctrl_c() {
     stty echo
-    clear
-    printf "Quitting...\n"
-    sleep .3
-    clear
+    # clear
+    # printf "Quitting...\n"
+    # sleep .3
+    # clear
     exit 0
 }
 function lines() {
@@ -26,33 +26,43 @@ draw() {
 }
 loop(){
     clear
-    lines
-    frameNum=1
-    echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)"
-    echo -e "Frame $frameNum"
-    echo -e ""
-    lines
+    # lines
+    # frameNum=1
+    # echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)"
+    # echo -e "Frame $frameNum"
+    # echo -e ""
+    # lines
     # tput cup 0 0
     # echo "HAIOHDIOG"
     # draw ${selected[@]};
-    ./iterCalc ${selected[@]}
-    # while true; do
-    #     # draw the next iteration
-    #     ./iterCalc ${selected[@]}
-    # done
+    new="${selected[@]}"
+    # new="1_1 1_4"
+    tput 0 0;
+    while true; do
+        # draw the next iteration
+        draw $new
+        sleep .05
+        tput cup 0 0;
+        clear
+        new=$(echo "$new" | tr ' ' '\n' | grep . | tr '\n' ' ')
+        echo "$new"
+        # draw "$new"
+        # echo "running ./iterCalc \"$new\""
+        new=$(./iterCalc $new)
+    done
     sleep 10000
 }
 clear
-sleep .2
-echo "Welcome to the terminal recreation of Conway's
-  ____    _    __  __ _____    ___  _____   _     ___ _____ _____ 
- / ___|  / \  |  \/  | ____|  / _ \|  ___| | |   |_ _|  ___| ____|
-| |  _  / _ \ | |\/| |  _|   | | | | |_    | |    | || |_  |  _|  
-| |_| |/ ___ \| |  | | |___  | |_| |  _|   | |___ | ||  _| | |___ 
- \____/_/   \_\_|  |_|_____|  \___/|_|     |_____|___|_|   |_____|"
-printf "\nPress any key to continue."
-read -r -sn1 t
-clear
+# sleep .2
+# echo "Welcome to the terminal recreation of Conway's
+#   ____    _    __  __ _____    ___  _____   _     ___ _____ _____ 
+#  / ___|  / \  |  \/  | ____|  / _ \|  ___| | |   |_ _|  ___| ____|
+# | |  _  / _ \ | |\/| |  _|   | | | | |_    | |    | || |_  |  _|  
+# | |_| |/ ___ \| |  | | |___  | |_| |  _|   | |___ | ||  _| | |___ 
+#  \____/_/   \_\_|  |_|_____|  \___/|_|     |_____|___|_|   |_____|"
+# printf "\nPress any key to continue."
+# read -r -sn1 t
+# clear
 lines
 echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)\t\t\t'i' = place block."
 echo -e "Move cursor with the arrow keys.\t'x' = remove block"

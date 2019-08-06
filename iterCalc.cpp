@@ -150,6 +150,9 @@ int main(int argc, char *argv[]) {
         cout << survivors[i] << " ";
     }
     cout << '\n';
+    
+    // TODO: IF ONE COORDINATE IS NEGATIVE, DON'T RETURN IT
+
 
 }
 
