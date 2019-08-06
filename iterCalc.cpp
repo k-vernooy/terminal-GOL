@@ -58,6 +58,22 @@ vector<int> liveNeighbors(vector<string> live, vector<string> tiles) {
 }
 
 
+// vector<string> addFive(vector<string> survivors) {
+//     vector<string> returnVector;
+//     for ( int i = 0; i < survivors.size(); i++ ) {
+//         string d1 = survivors[i].substr(0, 1);
+//         string d2 = survivors[i].substr(2, 1);
+
+//         stringstream data1(d1);
+//         int c1 = 0;
+//         data1 >> c1;
+//         c1 = c1 - 5;
+
+//         string combined = to_string(c1) + "_" + d2;
+//         returnVector.push_back(combined);
+//     }
+//     return returnVector;
+// }
 
 vector<string> relevantTiles(vector<string> input) {
     vector<string> relevantiles;
@@ -84,7 +100,7 @@ vector<string> relevantTiles(vector<string> input) {
 }
 
 int main(int argc, char *argv[]) {
-    int height, width;
+    // int height, width;
 
     // height = argv[1];
     // width = argv[2];
@@ -94,8 +110,9 @@ int main(int argc, char *argv[]) {
 
     vector<string> data;
 
-    for ( int i = argc - 1; i > 2; i--) {
+    for ( int i = argc - 1; i > 0; i--) {
         data.push_back(argv[i]);
+        // cout << argv[i];
     }
 
     vector<string> tiles = relevantTiles(data);
@@ -129,13 +146,16 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    for (int i = 0; i < survivors.size() - 1; i++) {
+    for (int i = 0; i < survivors.size(); i++) {
         cout << survivors[i] << " ";
     }
-    cout << survivors[survivors.size() - 1] << endl;
+    cout << '\n';
 
 }
 
+//==============================================
+// Game of life logic:
+//==============================================
 //A live cell dies if it has fewer than two live neighbors.
 // A live cell with two or three live neighbors lives on to the next generation.
 // A live cell with more than three live neighbors dies.
