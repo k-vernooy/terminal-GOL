@@ -101,7 +101,7 @@ vector<string> relevantTiles(vector<string> input) {
 // }
 
 int main(int argc, char *argv[]) {
-    int height, width;
+    // int height, width;
 
     // height = argv[1];
     // width = argv[2];
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
 
     vector<string> data;
 
-    for ( int i = argc - 1; i > 2; i--) {
+    for ( int i = 2; i < argc; i++ ) {
         data.push_back(argv[i]);
     }
 
