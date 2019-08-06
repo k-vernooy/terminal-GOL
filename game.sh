@@ -37,15 +37,15 @@ loop(){
     # draw ${selected[@]};
     new="${selected[@]}"
     # new="1_1 1_4"
-    tput 0 0;
+    tput cup 0 0;
     while true; do
         # draw the next iteration
+        echo "drawing of $new"
         draw $new
-        sleep .05
         tput cup 0 0;
+        sleep .03
         clear
         new=$(echo "$new" | tr ' ' '\n' | grep . | tr '\n' ' ')
-        echo "$new"
         # draw "$new"
         # echo "running ./iterCalc \"$new\""
         new=$(./iterCalc $new)
