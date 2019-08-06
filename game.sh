@@ -38,14 +38,11 @@ lines
 
 coordx=0
 coordy=5
-
 coords 5 0
 tput cup 5 0
 
-#===================================
-#  Create array to be passed to c++
-#+==================================
 declare -a selected
+
 selected+=( $(tput cols) $(tput lines) )
 stty -echo
 while true; do
@@ -81,7 +78,6 @@ while true; do
             tput cup $coordy $coordx
         ;;
         D) 
-            
             if [ $coordx -ne 0 ]; then
                 ((coordx--))
             else 
