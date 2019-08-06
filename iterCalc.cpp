@@ -8,12 +8,12 @@ using namespace std;
 
 vector<string> neighbors(string data) {
     string n1, n2, n3, n4, n5, n6, n7, n8;
-    string d1 = data.substr(0, 1);
-    string d2 = data.substr(2, 1);
+    string d1 = data.substr(0, 1); 
+    string d2 = data.substr(2, 1); 
 
-    stringstream data1(d1);
-    int c1 = 0;
-    data1 >> c1;
+    stringstream data1(d1); 
+    int c1 = 0; 
+    data1 >> c1; 
 
     stringstream data2(d2); 
     int c2 = 0; 
@@ -99,23 +99,6 @@ vector<string> relevantTiles(vector<string> input) {
     return relevantiles;
 }
 
-// vector<string> addFive(vector<string> survivors) {
-//     vector<string> returnVector;
-//     for ( int i = 0; i < survivors.size(); i++ ) {
-//         string d1 = survivors[i].substr(0, 1);
-//         string d2 = survivors[i].substr(2, 1);
-
-//         stringstream data1(d1);
-//         int c1 = 0;
-//         data1 >> c1;
-//         c1 = c1 - 5;
-
-//         string combined = to_string(c1) + "_" + d2;
-//         returnVector.push_back(combined);
-//     }
-//     return returnVector;
-// }
-
 int main(int argc, char *argv[]) {
     // int height, width;
 
@@ -127,7 +110,7 @@ int main(int argc, char *argv[]) {
 
     vector<string> data;
 
-    for ( int i = 2; i < argc; i++ ) {
+    for ( int i = argc - 1; i > 0; i--) {
         data.push_back(argv[i]);
         // cout << argv[i];
     }
@@ -163,15 +146,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // vector<string> survivorsFinal = addFive(survivors);
-
-    // for (int i = 0; i < survivorsFinal.size() - 1; i++) {
-    //     cout << survivorsFinal[i] << " ";
-    // }
-    // cout << survivorsFinal[survivorsFinal.size() - 1] << endl;
-
-
-    for (int i = 0; i < survivors.size() - 1; i++) {
+    for (int i = 0; i < survivors.size(); i++) {
         cout << survivors[i] << " ";
     }
     cout << '\n';
@@ -181,9 +156,9 @@ int main(int argc, char *argv[]) {
 
 }
 
-//==================================================
-//        RULES OF THE GAME OF LIFE
-//==================================================
+//=========================
+// Game of life logic:
+//=========================
 //A live cell dies if it has fewer than two live neighbors.
 // A live cell with two or three live neighbors lives on to the next generation.
 // A live cell with more than three live neighbors dies.
