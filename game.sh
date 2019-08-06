@@ -43,7 +43,7 @@ loop(){
         echo "drawing of $new"
         draw $new
         tput cup 0 0;
-        sleep .03
+        sleep .5
         clear
         new=$(echo "$new" | tr ' ' '\n' | grep . | tr '\n' ' ')
         # draw "$new"
