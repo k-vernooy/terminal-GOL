@@ -39,16 +39,24 @@ vector<string> neighbors(string data) {
 }
 
 vector<int> liveNeighbors(vector<string> live, vector<string> tiles) {
+    // passed as data (live), tiles (all relevant)
+
     vector<int> liveNeighbors;
-    // For each tile:
+
     for ( int i = 0; i < tiles.size(); i++) {
-        vector<string> neighborsList = neighbors(tiles[i]);
+        vector<string> neighborsList = {};
+        // cout << "getting neighbors of " << tiles[i] << endl;
+        neighborsList = neighbors(tiles[i]);
+
+        // for (int f = 0; f < 8; f++) {
+        //     cout << "\t" << neighborsList[i] << endl;
+        // }
         // for each neighbor of every tile:
         int liveNeCount = 0;
         for ( int j = 0; j < 8; j++) {
             // if the a given neighbor of a given tile is in live, add 1 to the liveNeCount of the given tile
             if ( find(live.begin(), live.end(), neighborsList[j]) != live.end() ) {
-                // cout << neighborsList[j] << " found" << endl;
+                
                 liveNeCount = liveNeCount + 1;
             }
         }
@@ -75,18 +83,23 @@ vector<int> liveNeighbors(vector<string> live, vector<string> tiles) {
 //     return returnVector;
 // }
 
-vector<string> relevantTiles(vector<string> input) {
-    vector<string> relevantiles;
-    string curTile;
 
+vector<string> relevantTiles(vector<string> input) {
+    vector<string> relevantiles = {};
+
+    for ( int i = 0; i < input.size(); i++ ) {
+        relevantiles.push_back(input[i]);
+    }
+
+    // Relevantiles array has all of input stored in it
+
+    // for each live tile
     for ( int i = 0; i < input.size(); i++) {
-        if ( find(relevantiles.begin(), relevantiles.end(), curTile) != relevantiles.end() )
-                cout << "";
-        else
-            relevantiles.push_back(input[i]);
+
+        vector<string> neighborArray = neighbors(input[i]);
 
         for ( int x = 0; x < 8; x++) {
-            curTile = neighbors(input[i])[x];
+            string curTile = neighborArray[x];
 
             //Checking if v contains the element x:
 
@@ -114,7 +127,7 @@ int main(int argc, char *argv[]) {
         data.push_back(argv[i]);
         // cout << argv[i];
     }
-
+    
     vector<string> tiles = relevantTiles(data);
 
     vector<bool> live;
