@@ -6,23 +6,6 @@
 
 using namespace std;
 
-// vector<string> addFive(vector<string> survivors) {
-//     vector<string> returnVector;
-//     for ( int i = 0; i < survivors.size(); i++ ) {
-//         string d1 = survivors[i].substr(0, 1);
-//         string d2 = survivors[i].substr(2, 1);
-
-//         stringstream data1(d1);
-//         int c1 = 0;
-//         data1 >> c1;
-//         c1 = c1 - 5;
-
-//         string combined = to_string(c1) + "_" + d2;
-//         returnVector.push_back(combined);
-//     }
-//     return returnVector;
-// }
-
 vector<string> neighbors(string data) {
     string n1, n2, n3, n4, n5, n6, n7, n8;
     string d1 = data.substr(0, 1);
@@ -99,6 +82,23 @@ vector<string> relevantTiles(vector<string> input) {
     }
     return relevantiles;
 }
+
+// vector<string> addFive(vector<string> survivors) {
+//     vector<string> returnVector;
+//     for ( int i = 0; i < survivors.size(); i++ ) {
+//         string d1 = survivors[i].substr(0, 1);
+//         string d2 = survivors[i].substr(2, 1);
+
+//         stringstream data1(d1);
+//         int c1 = 0;
+//         data1 >> c1;
+//         c1 = c1 - 5;
+
+//         string combined = to_string(c1) + "_" + d2;
+//         returnVector.push_back(combined);
+//     }
+//     return returnVector;
+// }
 
 int main(int argc, char *argv[]) {
     int height, width;
