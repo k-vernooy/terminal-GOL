@@ -129,6 +129,10 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    for (int i = 0; i < survivors.size() - 1; i++) {
+        cout << survivors[i] << " ";
+    }
+    cout << survivors[survivors.size() - 1] << endl;
 
 }
 
