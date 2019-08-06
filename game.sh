@@ -3,10 +3,10 @@
 trap ctrl_c INT
 function ctrl_c() {
     stty echo
-    # clear
-    # printf "Quitting...\n"
-    # sleep .3
-    # clear
+    clear
+    printf "Quitting...\n"
+    sleep .3
+    clear
     exit 0
 }
 function lines() {
@@ -14,8 +14,13 @@ function lines() {
 }
 coords() {
     tput cup 3 0;
-    display=$(echo "$1 - 5" | bc)
+    input=$1
+    display=$(( input - 5 ))
     printf "Cusor coordinates: $display,$2     "
+}
+frame() {
+    tput cup 0 0;
+    printf "Current frame: $1     "
 }
 draw() {
     for i; do
@@ -25,26 +30,23 @@ draw() {
     done
 }
 loop(){
-    clear
-    # lines
-    # frameNum=1
-    # echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)"
-    # echo -e "Frame $frameNum"
-    # echo -e ""
-    # lines
+    printf '\e[2J'
     # tput cup 0 0
     # echo "HAIOHDIOG"
     # draw ${selected[@]};
     new="${selected[@]}"
     # new="1_1 1_4"
     tput cup 0 0;
+    frameNum=0
     while true; do
+        (( frameNum++ ))
+        frame $frameNum
         # draw the next iteration
-        echo "drawing of $new"
+        # echo "drawing of $new"
         draw $new
         tput cup 0 0;
-        sleep .5
-        clear
+        sleep .05
+        printf '\e[2J'
         new=$(echo "$new" | tr ' ' '\n' | grep . | tr '\n' ' ')
         # draw "$new"
         # echo "running ./iterCalc \"$new\""
@@ -53,16 +55,16 @@ loop(){
     sleep 10000
 }
 clear
-# sleep .2
-# echo "Welcome to the terminal recreation of Conway's
-#   ____    _    __  __ _____    ___  _____   _     ___ _____ _____ 
-#  / ___|  / \  |  \/  | ____|  / _ \|  ___| | |   |_ _|  ___| ____|
-# | |  _  / _ \ | |\/| |  _|   | | | | |_    | |    | || |_  |  _|  
-# | |_| |/ ___ \| |  | | |___  | |_| |  _|   | |___ | ||  _| | |___ 
-#  \____/_/   \_\_|  |_|_____|  \___/|_|     |_____|___|_|   |_____|"
-# printf "\nPress any key to continue."
-# read -r -sn1 t
-# clear
+sleep .2
+echo "Welcome to the terminal recreation of Conway's
+  ____    _    __  __ _____    ___  _____   _     ___ _____ _____ 
+ / ___|  / \  |  \/  | ____|  / _ \|  ___| | |   |_ _|  ___| ____|
+| |  _  / _ \ | |\/| |  _|   | | | | |_    | |    | || |_  |  _|  
+| |_| |/ ___ \| |  | | |___  | |_| |  _|   | |___ | ||  _| | |___ 
+ \____/_/   \_\_|  |_|_____|  \___/|_|     |_____|___|_|   |_____|"
+printf "\nPress any key to continue."
+read -r -sn1 t
+clear
 lines
 echo -e "Grid Size: $(echo "$(tput lines) - 5" | bc) x $(tput cols)\t\t\t'i' = place block."
 echo -e "Move cursor with the arrow keys.\t'x' = remove block"
