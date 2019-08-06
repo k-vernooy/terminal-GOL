@@ -38,23 +38,23 @@ vector<string> neighbors(string data) {
     return returnArray;
 }
 
-void liveNeighbors(vector<string> live, vector<string> tiles) {
+vector<int> liveNeighbors(vector<string> live, vector<string> tiles) {
     vector<int> liveNeighbors;
-    int liveNeCount;
     // For each tile:
     for ( int i = 0; i < tiles.size(); i++) {
         vector<string> neighborsList = neighbors(tiles[i]);
         // for each neighbor of every tile:
+        int liveNeCount = 0;
         for ( int j = 0; j < 8; j++) {
             // if the a given neighbor of a given tile is in live, add 1 to the liveNeCount of the given tile
             if ( find(live.begin(), live.end(), neighborsList[j]) != live.end() ) {
-                cout << neighborsList[j] << " found" << endl;
+                // cout << neighborsList[j] << " found" << endl;
                 liveNeCount = liveNeCount + 1;
             }
         }
         liveNeighbors.push_back(liveNeCount);
     }
-    // return liveNeighbors;
+    return liveNeighbors;
 }
 
 
@@ -112,11 +112,11 @@ int main(int argc, char *argv[]) {
 
     }
 
-    // vector<int> neighbors = liveNeighbors(tiles, data);
-    // for ( int i = 0; i < tiles.size(); i++) {
-    //     cout << tiles[i] << " " << live[i] << endl;
-    // }
+    vector<int> neighbors = liveNeighbors(data, tiles);
 
-    liveNeighbors(data, tiles);
+    for ( int i = 0; i < tiles.size(); i++) {
+        cout << tiles[i] << " " << live[i] << " " << neighbors[i] << endl;
+    }
+
 
 }
