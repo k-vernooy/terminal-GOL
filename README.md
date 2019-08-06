@@ -10,3 +10,5 @@ The following command will download the game and run it.
 ` git clone "https://github.com/k-vernooy/terminal-GOL" && cd "terminal-GOL.git" && ./game`
 
 ## Images
+<img src=https://media.giphy.com/media/iKGJn0cVWDgEl3ZmOv/giphy.gif width=300>
+
