@@ -89,8 +89,8 @@ int main(int argc, char *argv[]) {
     // height = argv[1];
     // width = argv[2];
     
-    cout << "height: " << argv[1] << endl;
-    cout << "width: " << argv[2] << endl;
+    // cout << "height: " << argv[1] << endl;
+    // cout << "width: " << argv[2] << endl;
 
     vector<string> data;
 
@@ -114,9 +114,25 @@ int main(int argc, char *argv[]) {
 
     vector<int> neighbors = liveNeighbors(data, tiles);
 
+    vector<string> survivors;
+
     for ( int i = 0; i < tiles.size(); i++) {
-        cout << tiles[i] << " " << live[i] << " " << neighbors[i] << endl;
+        // cout << tiles[i] << " " << live[i] << " " << neighbors[i] << endl;
+        if ( live[i] == true && neighbors[i] == 2 ) {
+            survivors.push_back(tiles[i]);
+        } 
+        else if ( live[i] == true && neighbors[i] == 3 ) {
+            survivors.push_back(tiles[i]);
+        }
+        else if ( live[i] == false && neighbors[i] == 3 ) {
+            survivors.push_back(tiles[i]);
+        }
     }
 
 
 }
+
+//A live cell dies if it has fewer than two live neighbors.
+// A live cell with two or three live neighbors lives on to the next generation.
+// A live cell with more than three live neighbors dies.
+// A dead cell will be brought back to live if it has exactly three live neighbors.
