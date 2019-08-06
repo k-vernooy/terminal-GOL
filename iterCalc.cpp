@@ -58,6 +58,22 @@ vector<int> liveNeighbors(vector<string> live, vector<string> tiles) {
 }
 
 
+// vector<string> addFive(vector<string> survivors) {
+//     vector<string> returnVector;
+//     for ( int i = 0; i < survivors.size(); i++ ) {
+//         string d1 = survivors[i].substr(0, 1);
+//         string d2 = survivors[i].substr(2, 1);
+
+//         stringstream data1(d1);
+//         int c1 = 0;
+//         data1 >> c1;
+//         c1 = c1 - 5;
+
+//         string combined = to_string(c1) + "_" + d2;
+//         returnVector.push_back(combined);
+//     }
+//     return returnVector;
+// }
 
 vector<string> relevantTiles(vector<string> input) {
     vector<string> relevantiles;
@@ -113,6 +129,7 @@ int main(int argc, char *argv[]) {
 
     for ( int i = 2; i < argc; i++ ) {
         data.push_back(argv[i]);
+        // cout << argv[i];
     }
 
     vector<string> tiles = relevantTiles(data);
@@ -157,7 +174,10 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < survivors.size() - 1; i++) {
         cout << survivors[i] << " ";
     }
-    cout << survivors[survivors.size() - 1] << endl;
+    cout << '\n';
+    
+    // TODO: IF ONE COORDINATE IS NEGATIVE, DON'T RETURN IT
+
 
 }
 
