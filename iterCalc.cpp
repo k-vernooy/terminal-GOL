@@ -50,8 +50,6 @@ vector<string> relevantTiles(vector<string> input) {
         else
             relevantiles.push_back(input[i]);
 
-        cout << "adding coords to vector, calculating for neighboors: " << input[i] << endl;
-
         for ( int x = 0; x < 8; x++) {
             curTile = neighbors(input[i])[x];
 
@@ -85,13 +83,17 @@ int main(int argc, char *argv[]) {
 
     vector<string> tiles = relevantTiles(data);
 
-    for ( int i = 0; i < tiles.size(); i++) {
-        
+    vector<bool> live;
 
-        if ( std::find(data.begin(), data.end(), tiles[i]) != data.end() )
-            cout << tiles[i] << " is alive";
-        else
-            cout << tiles[i] << " is dead";
+    for ( int i = 0; i < tiles.size(); i++) {
+        if ( std::find(data.begin(), data.end(), tiles[i]) != data.end() ) {
+            cout << tiles[i] << " is alive" << endl;
+            live.push_back(true);
+        }
+        else {
+            cout << tiles[i] << " is dead\n";
+            live.push_back(false);
+        }
 
     }
 
