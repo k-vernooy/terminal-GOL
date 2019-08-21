@@ -122,7 +122,9 @@ while true; do
         ;;
         s)
             loop && break
-            
+            # clear
+            # echo ${selected[*]}
+            # sleep 10000
         ;;
         i)
             printf "█"
