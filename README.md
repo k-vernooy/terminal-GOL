@@ -8,10 +8,10 @@ Installation
 The following will download the game and run it.  
 
 ```bash
-git clone "https://github.com/k-vernooy/terminal-GOL"  
-cd "terminal-GOL"  
-g++ iterCalc.cpp -std=c++11 -o iterCalc  
-./game 
+git clone "https://github.com/k-vernooy/terminal-GOL"  && cd "terminal-GOL"  
+make  
+make install  
+terminalGOL
 ```
 
 ## Images
