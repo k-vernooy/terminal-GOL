@@ -1,7 +1,6 @@
 .PHONY: all say_hello generate clean
 
 CC = g++
-prefix = /usr/local
 PATH_TO_FILE = bin/iterCalc
 
 ifneq ("$(wildcard $(PATH_TO_FILE))","")
@@ -27,8 +26,8 @@ compile:
 
 install:
 	@echo "Copying executables..."
-	@install -m 0755 bin/iterCalc $(prefix)/bin
-	@install -m 0755 terminalGOL $(prefix)/bin
+	@install -m 0755 bin/iterCalc /usr/local/bin
+	@install -m 0755 terminalGOL /usr/local/bin
 	@printf "\x1b[32mSuccessfully copied binaries.\x1b[0m \nRun command '\x1b[31mterminalGOL\x1b[0m' to start program!\n"
 
 brewcompile:
@@ -36,5 +35,5 @@ brewcompile:
 	@${CC} -std=c++11 src/iterCalc.cpp -o bin/iterCalc
 
 brewinstall:
-	@install -m 0755 bin/iterCalc $(prefix)/bin
-	@install -m 0755 terminalGOL $(prefix)/bin
+	@install -m 0755 bin/iterCalc /usr/local/bin
+	@install -m 0755 terminalGOL /usr/local/bin
