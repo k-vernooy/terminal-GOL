@@ -35,4 +35,7 @@ brewcompile:
 	@${CC} -std=c++11 src/iterCalc.cpp -o bin/iterCalc
 
 brewinstall:
-	@echo test
+	@cp bin/iterCalc /usr/local/bin
+	@cp terminalGOL /usr/local/bin
+	# @sudo install -m 0755 bin/iterCalc /usr/local/bin
+	# @sudo install -m 0755 terminalGOL /usr/local/bin
