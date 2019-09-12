@@ -1,0 +1,12 @@
+#!/bin/bash
+
+path=$1
+
+newPath=$(echo "$path" | cut -d '=' -f2-)
+
+if [ ! -d "$newPath/bin" ]; then
+    mkdir "$newPath/bin"
+fi
+
+install -m 0755 bin/iterCalc $newPath/bin/iterCalc
+install -m 0755 bin/terminalGOL $newPath/bin/terminalGOL
