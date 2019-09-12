@@ -33,8 +33,3 @@ install:
 brewcompile:
 	@mkdir bin
 	@${CC} -std=c++11 src/iterCalc.cpp -o bin/iterCalc
-
-brewinstall:
-
-	@install -m 0755 bin/iterCalc $(brew --prefix)/bin
-	@install -m 0755 terminalGOL $(brew --prefix)/bin
