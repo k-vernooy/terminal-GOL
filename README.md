@@ -26,4 +26,4 @@ When run with no arguments, it enters interactive mode.
 Should be compatible with any OS, but as of now has only been tested on macOS.
 
 ## Images
-<img src=https://media.giphy.com/media/iKGJn0cVWDgEl3ZmOv/giphy.gif width=250px> <div style='width:100px;'></div><img src=https://media.giphy.com/media/PmXBNalDHZ4oLdUpSk/giphy.gif width=250px>
+<img src=https://media.giphy.com/media/iKGJn0cVWDgEl3ZmOv/giphy.gif width=250px><img src=https://media.giphy.com/media/PmXBNalDHZ4oLdUpSk/giphy.gif width=250px>
