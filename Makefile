@@ -36,5 +36,5 @@ brewcompile:
 
 brewinstall:
 
-	@install -m 0755 bin/iterCalc /usr/local/bin
-	@install -m 0755 terminalGOL /usr/local/bin
+	@install -m 0755 bin/iterCalc $(brew --prefix)/bin
+	@install -m 0755 terminalGOL $(brew --prefix)/bin
