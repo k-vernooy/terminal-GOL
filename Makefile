@@ -1,9 +1,9 @@
 .PHONY: all say_hello generate clean
 
 CC = g++
-PATH_TO_FILE = bin/iterCalc
+iterCalcCompiled = bin/iterCalc
 
-ifneq ("$(wildcard $(PATH_TO_FILE))","")
+ifneq ("$(wildcard $(iterCalcCompiled))","")
 	# @printf "\x1b[31mProgram already compiled, exiting...\e[0m\n"
 all: exit
 else
@@ -17,8 +17,6 @@ exit:
 
 compile:
 	@echo "Compiling..."
-
-	@mkdir bin
 	@${CC} -std=c++11 src/iterCalc.cpp -o bin/iterCalc
 	@printf "\e[32mCompiled successfuly!\e[0m\n"
 	@sleep .4
@@ -27,9 +25,8 @@ compile:
 install:
 	@echo "Copying executables..."
 	@install -m 0755 bin/iterCalc /usr/local/bin
-	@install -m 0755 terminalGOL /usr/local/bin
+	@install -m 0755 bin/terminalGOL /usr/local/bin
 	@printf "\x1b[32mSuccessfully copied binaries.\x1b[0m \nRun command '\x1b[31mterminalGOL\x1b[0m' to start program!\n"
 
 brewcompile:
-	@mkdir bin
 	@${CC} -std=c++11 src/iterCalc.cpp -o bin/iterCalc
