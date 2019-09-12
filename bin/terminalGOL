@@ -50,7 +50,7 @@ loop(){
         new=$(echo "$new" | tr ' ' '\n' | grep . | tr '\n' ' ')
         # draw "$new"
         # echo "running ./iterCalc \"$new\""
-        new=$(/usr/local/bin/iterCalc $new)
+        new=$(./iterCalc $new)
     done
     sleep 10000
 }
