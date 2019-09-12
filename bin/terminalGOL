@@ -42,7 +42,7 @@ loop(){
         sleep .05
         printf '\e[2J'
         new=$(echo "$new" | tr ' ' '\n' | grep . | tr '\n' ' ')
-        new=$(./iterCalc $new)
+        new=$(iterCalc $new)
     done
     sleep 10000
 }
