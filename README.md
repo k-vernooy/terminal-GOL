@@ -1,4 +1,5 @@
 # terminal-GOL
+<img src="doc.png" width=400>
 
 A terminal implementation of John Conway's cellular automaton, [ the Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). From Wikipedia:
 >One interacts with the Game of Life by creating an initial configuration and observing how it evolves, or, for advanced players, by creating patterns with particular properties.
@@ -15,6 +16,7 @@ git clone "https://github.com/k-vernooy/terminal-GOL"  && cd "terminal-GOL"
 make  
 make install  
 ```
+
 ## Usage
 After installation the program can then be run with the command `terminalGOL`.
 When run with no arguments, it enters interactive mode.
